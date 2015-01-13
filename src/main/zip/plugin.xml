@@ -1,37 +1,86 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<plugin xmlns="http://www.urbancode.com/PluginXMLSchema_v1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<plugin xmlns="http://www.urbancode.com/PluginXMLSchema_v1"
+        xmlns:server="http://www.urbancode.com/PluginServerXMLSchema_v1"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <header>
-    <identifier id="com.urbancode.air.plugin.helloworld" version="@API_VERSION@" name="Hello World"/>
-    <description>The Hello World plugin echoes out "Hello World"</description>
-    <tag>Templatenan/Hello World</tag>
+    <identifier id="com.urbancode.air.plugin.gradle" version="@API_VERSION@" name="Gradle"/>
+    <description>The Gradle plugin is an automation based plugin. It is run during the build and/or deployment to automate the execution of Gradle tasks defined in a build.gradle file.</description>
+    <tag>Build/Build Tools/Gradle</tag>
   </header>
 
-  <step-type name="Hello World">
-    <description>Echo out a "Hello World" style message</description>
-    <properties>
-      <property name="name">
-        <property-ui type="textBox"
-                     label="Name"
-                     description="The name of the person you wish to say 'Hello' to."/>
-      </property>
-    </properties>
-    <post-processing>
-      <![CDATA[
-        if (properties.get("exitCode") != 0) {
-            properties.put(new java.lang.String("Status"), new java.lang.String("Failure"));
-        }
-        else {
-            properties.put("Status", "Success");
-        }
-     ]]>
-    </post-processing>
-
-    <command program="${GROOVY_HOME}/bin/groovy">
-      <arg value="-cp"/>
-      <arg path="classes:lib/groovy-plugin-utils-1.0.jar"/>
-      <arg file="helloworld.groovy"/>
-      <arg file="${PLUGIN_INPUT_PROPS}"/>
-      <arg file="${PLUGIN_OUTPUT_PROPS}"/>
-    </command>
+  <step-type name="Gradle">
+    <description>Execute a Gradle script.</description>
+      <properties>
+        <property name="gradleFileName" required="true">
+          <server:property-ui type="textBox"
+                              label="Gradle Script File"
+                              default-value="build.gradle"
+                              description="The name of the Gradle script file." />
+        </property>
+        <property name="taskNames">
+          <server:property-ui type="textBox"
+                              label="Tasks"
+                              description="The names of the tasks to run in the Gradle script file. Empty for default task." />
+        </property>
+        <property name="sysProperties">
+          <server:property-ui type="textAreaBox"
+                              label="System Properties"
+                              description="These properties are passed to Gradle as system properties. Enter each argument
+                              on a new line in the following format: name=value"/>
+        </property>
+        <property name="projProperties">
+          <server:property-ui type="textAreaBox"
+                              label="Project Properties"
+                              description="These properties are passed to Gradle and will be available within the Gradle script.
+                              Enter each argument on a new line in the following format: name=value"/>
+        </property>
+        <property name="gradleHome">
+          <server:property-ui type="textBox"
+                              label="GRADLE_HOME"
+                              description="The path to the Gradle installation to execute the Gradle script. Default is the
+                              agent's GRADLE_HOME environment variable."/>
+        </property>
+        <property name="gradleOptions">
+          <server:property-ui type="textAreaBox"
+                              label="Gradle Options"
+                              description="Gradle command line options, such as using '-i' to set the logging level to info.
+                              Enter each argument on a new line."/>
+        </property>
+        <property name="javaHome">
+          <server:property-ui type="textBox"
+                              label="JAVA_HOME"
+                              default-value="${env/JAVA_HOME}"
+                              description="The path to the Java installation to execute Gradle. Default is the agent's JAVA_HOME environment variable."/>
+        </property>
+        <property name="jvmProperties">
+          <server:property-ui type="textAreaBox"
+                              label="JVM Properties"
+                              description="JVM-specific arguments, such as using '-Xmx=512m' for max memory. Enter each argument on a new line."/>
+        </property>
+        <property name="scriptContent">
+          <server:property-ui type="textAreaBox"
+                              label="Script Content"
+                              description="Optionally define the content of the Gradle script. The content will be written
+                              to the 'Gradle Script File' then executed."/>
+        </property>
+      </properties>
+      <post-processing>
+        <![CDATA[
+          if (properties.get("exitCode") != 0) {
+              properties.put(new java.lang.String("Status"), new java.lang.String("Failure"));
+          }
+          else {
+              properties.put("Status", "Success");
+          }
+       ]]>
+      </post-processing>
+      <command program="${env/GROOVY_HOME}/bin/groovy">
+        <arg value="-cp" />
+        <arg path="classes:lib/groovy-plugin-utils-1.0.jar" />
+        <arg file="gradle.groovy" />
+        <arg file="${PLUGIN_INPUT_PROPS}"/>
+        <arg file="${PLUGIN_OUTPUT_PROPS}"/>
+      </command>
   </step-type>
+
 </plugin>

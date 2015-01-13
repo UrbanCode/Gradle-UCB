@@ -33,7 +33,7 @@
   the Type would be "Deploy"
   -->
 
-  <integration type="automation"/>
+  <integration type="Build"/>
 
 
   <!--
@@ -66,7 +66,7 @@
   For example:
   Apache Ant is a software tool to automate software processes during the build or
   deployment of an application. Ant uses an propitiatory XML file to define build
-  and/or deployment steps(referred to as targets by ant) . The Ant executable is
+  and/or deployment steps(referred to as targets by Ant) . The Ant executable is
   called to execute the targets in the build.xml.
   -->
 
@@ -83,11 +83,9 @@
 
   excepted values for type include: PDF, WEBSITE, VIDEO
   -->
-
   <related-info>
-    <link title="Command Prompt" type="WEBSITE" description="Define a Command Prompt" url ="http://en.wikipedia.org/wiki/Command_Prompt"/>
+    <link title="Gradle Website" type="WEBSITE" description="More information at Gradle's website." url ="https://www.gradle.org/"/>
   </related-info>
-
   <!--
   **meta-html in NOT required**
 
@@ -100,8 +98,8 @@
   -->
 
   <meta-html>
-    <meta name="description" content="" />
-    <meta name="keywords" content="" />
+    <meta name="description" content="AnthillPro Gradle build plugin" />
+    <meta name="keywords" content="AnthillPro, Gradle, plugin" />
   </meta-html>
 
   <!-- Do not change the release-version, the build process injects it. -->
@@ -122,22 +120,11 @@
       Support for was added for version 10.0 for software X
       or
       releaseNotes/release1.html (where release1.html contains html formatted version information)
-
-      To add a new release note add this with a description in it of the changes:
-      <release-note plugin-version="1">....</release-note>
-
-      Our automated release process will replace 'LATEST' with the released version.
-
-      If this already exists in the file, then the described changes have not been released yet and
-      you should just append to the existing 'LATEST' tag.
       -->
 
     <release-note plugin-version="1">
-      Installing this plugin will give you access to the steps listed below. These steps can be used when designing a component process.
+      Loading the Gradle plugin will give users access to the Gradle Job steps for use when designing your build or deployment job.
     </release-note>
 
-    <release-note plugin-version="2">
-      Added a name property to the Hello World step
-    </release-note>
   </release-notes>
 </pluginInfo>
