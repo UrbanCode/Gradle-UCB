@@ -2,7 +2,7 @@
 
 import com.urbancode.air.*
 
-final def apTool = new AirPluginTool()
+final def apTool = new AirPluginTool(this.args[0], this.args[1])
 final def props = apTool.getStepProperties()
 final def workDir = new File('.').canonicalFile
 
@@ -105,14 +105,14 @@ try {
     //
     CommandHelper cmdHelper = new CommandHelper(workDir)
     if (GRADLE_HOME) {
-        cmdHelper.environment().put("GRADLE_HOME", GRADLE_HOME)
+        cmdHelper.addEnvironmentVariable("GRADLE_HOME", GRADLE_HOME)
     }
     if (JAVA_HOME) {
-        cmdHelper.environment().put("JAVA_HOME", JAVA_HOME)
+        cmdHelper.addEnvironmentVariable("JAVA_HOME", JAVA_HOME)
     }
     if (jvmProperties) {
         def javaOpts = jvmProperties.readLines().join(' ')
-        cmdHelper.environment().put("JAVA_OPTS", javaOpts)
+        cmdHelper.addEnvironmentVariable("JAVA_OPTS", javaOpts)
     }
     cmdHelper.runCommand("Building project", commandLine)
 }

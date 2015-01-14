@@ -37,6 +37,7 @@
         <property name="gradleHome">
           <server:property-ui type="textBox"
                               label="GRADLE_HOME"
+                              default-value="${env/GRADLE_HOME}"
                               description="The path to the Gradle installation to execute the Gradle script. Default is the
                               agent's GRADLE_HOME environment variable."/>
         </property>
