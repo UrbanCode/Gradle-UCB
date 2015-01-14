@@ -123,7 +123,7 @@
       -->
 
     <release-note plugin-version="1">
-      Loading the Gradle plugin will give users access to the Gradle Job steps for use when designing your build or deployment job.
+      Loading the Gradle plugin will give users access to the Gradle Job steps for use when designing your build.
     </release-note>
 
   </release-notes>
