@@ -56,7 +56,7 @@
         <property name="jvmProperties">
           <server:property-ui type="textAreaBox"
                               label="JVM Properties"
-                              description="JVM-specific arguments, such as using '-Xmx=512m' for max memory. Enter each argument on a new line."/>
+                              description="JVM-specific arguments, such as using '-Xmx512m' for max memory. Enter each argument on a new line."/>
         </property>
         <property name="scriptContent">
           <server:property-ui type="textAreaBox"

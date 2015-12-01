@@ -21,5 +21,8 @@
       Loading the Gradle plugin will give users access to the Gradle Job steps for use when designing your build.
     </release-note>
 
+    <release-note plugin-version="2">
+      Updated the description of the 'JVM Properties' property to properly demonstrate how to set the maximum heap size
+    </release-note>
   </release-notes>
 </pluginInfo>
