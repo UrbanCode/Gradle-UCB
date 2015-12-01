@@ -4,5 +4,10 @@
         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 
   <migrate to-version="2">
+    <migrate-command name="Gradle">
+      <migrate-properties>
+        <migrate-property name="jvmProperties"/>
+      </migrate-properties>
+    </migrate-command>
   </migrate>
 </plugin-upgrade>
