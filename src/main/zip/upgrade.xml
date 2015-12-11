@@ -10,4 +10,7 @@
       </migrate-properties>
     </migrate-command>
   </migrate>
+
+  <migrate to-version="3">
+  </migrate>
 </plugin-upgrade>

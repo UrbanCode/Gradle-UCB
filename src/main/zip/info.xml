@@ -24,5 +24,9 @@
     <release-note plugin-version="2">
       Updated the description of the 'JVM Properties' property to properly demonstrate how to set the maximum heap size
     </release-note>
+
+    <release-note plugin-version="3">
+      Add support for using Gradle wrapper files
+    </release-note>
   </release-notes>
 </pluginInfo>

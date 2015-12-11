@@ -4,6 +4,8 @@ apply plugin: 'groovy'
 
 defaultTasks 'distPlugin'
 
+def buildLocaleDir = 'build/locale'
+
 configurations {
     // Remove the groovy-all jar from runtime dependencies
     runtime.exclude module: 'groovy-all'
@@ -16,12 +18,13 @@ repositories {
 dependencies {
     // groovy-plugin-utils pulls down groovy-all as a transitive dependency for the 'compile' configuration
     compile 'com.ibm.urbancode.plugins:groovy-plugin-utils:1.0'
+    compile localGroovy()
 }
 
 sourceSets {
     main {
         groovy {
-            srcDirs = ['src/main/groovy', 'src/main/zip']
+            srcDirs = ['src/main/groovy', 'src/main/zip', 'src/main/util']
         }
     }
 }
@@ -31,7 +34,7 @@ task copyDeps(type: Copy) {
     into 'lib'
 }
 
-task distPlugin(type: Zip, dependsOn: 'compileGroovy') {
+task distPlugin(type: Zip, dependsOn: ['compileGroovy', 'gatherI18n']) {
     def releaseVersion = apiVersion + "." + pluginVersion
     from(sourceSets.main.groovy.srcDirs) {
         filter(ReplaceTokens, tokens: [API_VERSION: apiVersion, RELEASE_VERSION: releaseVersion])
@@ -39,7 +42,19 @@ task distPlugin(type: Zip, dependsOn: 'compileGroovy') {
     into('lib') {
         from copyDeps
     }
+    into('locale') {
+        from buildLocaleDir
+    }
     archiveName = "${pluginName}-${releaseVersion}.zip"
 }
 
-task cleanAll(dependsOn: ['clean', 'cleanCopyDeps', 'cleanDistPlugin'])
+task gatherI18n(type: JavaExec) {
+    delete buildLocaleDir
+    mkdir buildLocaleDir
+
+    main = 'i18n-scraper'
+    args 'build/locale/en.properties'
+    classpath = sourceSets.main.runtimeClasspath
+}
+
+task cleanAll(dependsOn: ['clean', 'cleanCopyDeps', 'cleanDistPlugin', 'cleanGatherI18n'])

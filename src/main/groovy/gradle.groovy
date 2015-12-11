@@ -54,9 +54,14 @@ try {
     // Build Command Line
     //
     def gradle = 'gradle'
-    if (GRADLE_HOME) {
+    def gradlew = new File(workDir, gradle + 'w' + (apTool.isWindows ? '.bat' : ''))
+    if (gradlew.exists()) {
+        gradle = "./" + gradlew.name
+    }
+    else if (GRADLE_HOME) {
         gradle = new File(GRADLE_HOME, "bin/gradle" + (apTool.isWindows ? ".bat" : "")).absolutePath
     }
+
     def commandLine = [gradle]
 
     if (gradleOptions) {
