@@ -28,5 +28,9 @@
     <release-note plugin-version="3">
       Add support for using Gradle wrapper files
     </release-note>
+
+    <release-note plugin-version="4">
+      Set execute bit on the Gradle wrapper
+    </release-note>
   </release-notes>
 </pluginInfo>

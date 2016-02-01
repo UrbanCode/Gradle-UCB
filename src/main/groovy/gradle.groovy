@@ -50,16 +50,22 @@ if (scriptContent) {
 }
 
 try {
+    CommandHelper cmdHelper = new CommandHelper(workDir)
+
     //
     // Build Command Line
     //
+    def isWindows = apTool.isWindows
     def gradle = 'gradle'
-    def gradlew = new File(workDir, gradle + 'w' + (apTool.isWindows ? '.bat' : ''))
+    def gradlew = new File(workDir, gradle + 'w' + (isWindows ? '.bat' : ''))
     if (gradlew.exists()) {
-        gradle = "./" + gradlew.name
+        if (!isWindows) {
+            cmdHelper.runCommand("Setting execute permission for ${gradlew.name}", ["chmod", "+x", gradlew.name])
+        }
+        gradle = (isWindows ? "" : "./") + gradlew.name
     }
     else if (GRADLE_HOME) {
-        gradle = new File(GRADLE_HOME, "bin/gradle" + (apTool.isWindows ? ".bat" : "")).absolutePath
+        gradle = new File(GRADLE_HOME, "bin/gradle" + (isWindows ? ".bat" : "")).absolutePath
     }
 
     def commandLine = [gradle]
@@ -108,7 +114,6 @@ try {
     //
     // Launch Process
     //
-    CommandHelper cmdHelper = new CommandHelper(workDir)
     if (GRADLE_HOME) {
         cmdHelper.addEnvironmentVariable("GRADLE_HOME", GRADLE_HOME)
     }
