@@ -115,9 +115,15 @@ for (def prop : propertyList) {
 }
 
 println "Writing out the sorted properties..."
-def comments = "NLS_ENCODING=UTF-8\nNLS_MESSAGEFORMAT_NONE"
 String localeFile = args[0]
 File outputFile = new File(localeFile)
-def writer = new FileWriter(outputFile)
-translationProperties.store(writer, comments)
-writer.close()
+OutputStream os = new ByteArrayOutputStream()
+translationProperties.store(os, null)
+
+// Output all lines except for the date comment included by the Properties class
+def lines = os.toString("UTF-8").readLines()
+def outputLines = ["#NLS_ENCODING=UTF-8", "#NLS_MESSAGEFORMAT_NONE"]
+outputLines.addAll(lines[1..lines.size() - 1])
+outputLines << ""
+outputFile.write(outputLines.join("\r\n"))
+os.close()
