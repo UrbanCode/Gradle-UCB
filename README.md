@@ -10,3 +10,6 @@ for our plug-ins can be found in the [IBM UrbanCode Build Help Center](http://ww
 `gradle`
 
 The Gradle plug-in .zip file can be found in build/distributions once the project has been built.
+
+### License
+This plugin is protected under the [Eclipse Public 1.0 License](http://www.eclipse.org/legal/epl-v10.html)
