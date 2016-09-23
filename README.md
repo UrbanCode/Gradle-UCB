@@ -1,4 +1,4 @@
-# IBM UrbanCode Build Gradle Plug-in
+# IBM UrbanCode Build Gradle Plug-in [![Build Status](https://travis-ci.org/IBM-UrbanCode/Gradle-UCB.svg?branch=master)](https://travis-ci.org/IBM-UrbanCode/Gradle-UCB)
 ---
 
 The IBM UrbanCode Build Gradle Plug-in is a community plugin that adds a Gradle integration to IBM UrbanCode Build. This is the suggested repository to be forked and used as a base for all community plug-ins.
