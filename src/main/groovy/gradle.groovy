@@ -126,6 +126,16 @@ try {
     }
     cmdHelper.runCommand("Building project", commandLine)
 }
+catch (FileNotFoundException ex){
+    throw new FileNotFoundException("[Error] Could not find files or folders needed for the gradle command. " +
+        "Confirm directory paths specified for the project, Gradle home, Java home, and script file.")
+}
+catch (RuntimeException ex){
+    throw new RuntimeException("[Error] Exception found during runtime.")
+}
+catch (Exception ex){
+    throw new Exception("[Error] Unknown error interrupted the Gradle command.")
+}
 finally {
     if (deleteOnExit) {
         gradleFile.delete()

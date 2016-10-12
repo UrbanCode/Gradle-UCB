@@ -32,5 +32,9 @@
     <release-note plugin-version="4">
       Set execute bit on the Gradle wrapper
     </release-note>
+
+    <release-note plugin-version="5">
+      Add catch blocks to the main script.
+    </release-note>
   </release-notes>
 </pluginInfo>
