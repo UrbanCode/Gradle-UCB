@@ -19,3 +19,13 @@ notifications:
     on_success: change
     on_failure: change
   email: false
+deploy:
+  provider: releases
+  api_key:
+    secure: e5Vh46RBDoME2GbWGUUnGc48pSCXaUEamuo98WjsA8Fi9yyIvTukwnwuoMjcEEu/v5f9UVb9l6RGtAjJHckt3HS65jPELZEkPw6w0WH1YIa/8rle3pzyTMczxCrtlHv+s0Q/giXxVOg2Eb0sB74m6T/s4cE5yJ8ksTUNsfdW+1uAATkUF4EVqVQKULvx/w68Q/7VtEdWtmch6MUyWW9dEcP2Pn08Oc/y0pqOOBhT1GHcaHg4tDCuoObWtut8Yy5nfSPxP+gxcCTnahn6nVA5z+gvyibBA5jQnTsOLYCuycpGx/qmfwZaBcj8hG79Ftgo5U1wAIMg61c7ceHDghTELWdM5mV3h2v6OFPLnoNCqsRytKLuW19eNN8jKHKdeCDvfhzcPgRmNBeDTku407t2PyU5YZ3kAHJCMWuz52hZo8m0Z2Jv2d2aUO52GaBoAsoFqddpJY2fAwlI17Nl6ok4mdMOdyKHQ6f/4R2krugtaNkCbLkBw8Z3Hw2SMYIoE23ANB/E5u/9yHwIJiofNqWZRP2M/CwqbE3XUm2AXFsFGCWmREwOKLtL1XwNVN1FNnKPzTu8OtTMZNMH9sE0Aqy1Dy1okv7yRDbsWeA9jqhz5PmMj8RpU78iJhODC/ugP0TmGAADzf4PO+GmeU8VPJQ1ImbevPeaNbs1CvY6yGyBlPo=
+  file_glob: true
+  file: build/distributions/*.zip
+  skip_cleanup: true
+  on:
+    tags: true
+    repo: IBM-UrbanCode/Gradle-UCB
