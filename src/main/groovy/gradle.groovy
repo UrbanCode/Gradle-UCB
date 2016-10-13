@@ -128,13 +128,13 @@ try {
 }
 catch (FileNotFoundException ex){
     throw new FileNotFoundException("[Error] Could not find files or folders needed for the gradle command. " +
-        "Confirm directory paths specified for the project, Gradle home, Java home, and script file.")
+        "Confirm directory paths specified for the project, Gradle home, Java home, and script file. $ex", ex)
 }
 catch (RuntimeException ex){
-    throw new RuntimeException("[Error] Exception found during runtime.")
+    throw new RuntimeException("[Error] Exception found during runtime. $ex", ex)
 }
 catch (Exception ex){
-    throw new Exception("[Error] Unknown error interrupted the Gradle command.")
+    throw new Exception("[Error] Unknown error interrupted the Gradle command. $ex", ex)
 }
 finally {
     if (deleteOnExit) {
