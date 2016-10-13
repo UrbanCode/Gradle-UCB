@@ -75,7 +75,7 @@
           }
        ]]>
       </post-processing>
-      <command program="${env/GROOVY_HOME}/bin/groovy">
+      <command program="${GROOVY_HOME}/bin/groovy">
         <arg value="-cp" />
         <arg path="classes:lib/groovy-plugin-utils-1.0.jar" />
         <arg file="gradle.groovy" />
