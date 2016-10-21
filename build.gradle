@@ -7,8 +7,6 @@ defaultTasks 'distPlugin'
 def buildLocaleDir = 'build/locale'
 
 configurations {
-    // Remove the groovy-all jar from runtime dependencies
-    runtime.exclude module: 'groovy-all'
 }
 
 repositories {
@@ -18,7 +16,6 @@ repositories {
 dependencies {
     // groovy-plugin-utils pulls down groovy-all as a transitive dependency for the 'compile' configuration
     compile 'com.ibm.urbancode.plugins:groovy-plugin-utils:1.0'
-    compile localGroovy()
 }
 
 sourceSets {
