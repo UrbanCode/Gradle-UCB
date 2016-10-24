@@ -36,5 +36,9 @@
     <release-note plugin-version="5">
       Add catch blocks to the main script.
     </release-note>
+
+    <release-note plugin-version="6">
+      Use bundled Groovy v1.8.8 for driver script.
+    </release-note>
   </release-notes>
 </pluginInfo>
